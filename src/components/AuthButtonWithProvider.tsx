@@ -1,9 +1,7 @@
-import React from 'react'
 import type { IconType } from 'react-icons'
 import { FaChevronRight } from 'react-icons/fa6'
 import { GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../config/firebaseConfig';
-import { getUserDetails } from '../api';
 import useUser from '../hooks/useUser';
 type iProps = {
     Icon: IconType,

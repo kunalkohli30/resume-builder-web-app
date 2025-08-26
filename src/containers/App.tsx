@@ -18,7 +18,11 @@ function App() {
               <Route index element={<HomeContainer />} />
               <Route path="/template/create" element={<CreateTemplate />} />
               <Route path="/profile/:uid" element={<UserProfile />} />
-              <Route path="/resume/*" element={<CreateResume />} />
+              {/* {TemplatesData?.map(template => (
+                <Route path={`/resume/${template.name}`} key={template.id} element={template.component()} />
+              ))} */}
+              <Route path={'/resume/:templateName'}  element={<CreateResume />} />
+              {/* <Route path="/resume/*" element={<CreateResume />} /> */}
               <Route path="/resumeDetails/:templateId" element={<TemplateDesign />} />
             </Route>
             <Route path="/auth" element={<Authentication />} />

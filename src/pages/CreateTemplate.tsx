@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { type imageAssetData, type createTemplateFormData, type templateData } from '../models/model';
+import { type ImageAssetData, type createTemplateFormData, type TemplateData } from '../models/model';
 import { PuffLoader } from 'react-spinners';
 import { FaTrash, FaUpload } from 'react-icons/fa6';
 import { toast } from 'react-toastify';
@@ -8,19 +8,19 @@ import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebas
 import { adminIds, initialTags } from '../utils/helpers';
 import { deleteDoc, doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import useTemplates from '../hooks/useTemplates';
-import { data, replace, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import useUser from '../hooks/useUser';
 const CreateTemplate = () => {
 
     const [formData, setFormData] = useState<createTemplateFormData>({ title: '', imageUrl: '' });
-    const [imageAsset, setImageAsset] = useState<imageAssetData>({
+    const [imageAsset, setImageAsset] = useState<ImageAssetData>({
         isImageLoading: false,
         uri: null,
         progress: 0
     });
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-    const { data: templatesData, isError: templatesError, isLoading: templatesIsLoading, refetch: templatesRefetch } = useTemplates();
+    const { data: templatesData, isLoading: templatesIsLoading, refetch: templatesRefetch } = useTemplates();
     const { data, isLoading } = useUser();
 
     const navigate = useNavigate();
@@ -109,7 +109,7 @@ const CreateTemplate = () => {
     }
 
     // to remove the template from the cloud
-    const removeTemplate = async (template: templateData) => {
+    const removeTemplate = async (template: TemplateData) => {
         const deleteRef = ref(storage, template.imageUrl);
         await deleteObject(deleteRef).then(async () => {
             await deleteDoc(doc(db, "templates", template._id)).then(() => {

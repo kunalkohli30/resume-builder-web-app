@@ -1,14 +1,15 @@
 import { useQuery } from "react-query"
 import { toast } from "react-toastify";
 import { getUserDetails } from "../api";
+import type { UserData } from "../models/model";
 
 const useUser = () => {
-    const {data, isLoading, isError, refetch} = useQuery(
+    const {data, isLoading, isError, refetch} = useQuery<UserData | undefined>(
         "user",
         async () => {
             try {
                 console.log("Fetching user details");
-                const userDetail = await getUserDetails();
+                const userDetail: UserData = await getUserDetails();
                 return userDetail;
             } catch(error: any) {
                 if(!error.message.includes("not authenticated")) {

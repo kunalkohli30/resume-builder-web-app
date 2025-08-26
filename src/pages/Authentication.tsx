@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Logo } from '../assets'
 import { Footer } from '../containers'
 import { AuthButtonWithProvider, MainSpinner } from '../components'
 import { FaGoogle, FaGithub } from 'react-icons/fa6'
 import useUser from '../hooks/useUser'
-import { replace, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {motion} from 'framer-motion';
 import { fadeInOutWithOpacity } from '../animation'
 
 const Authentication = () => {
 
-    const {data, isError, isLoading, refetch} = useUser();
+    const {data, isLoading} = useUser();
     const navigate = useNavigate();
 
     useEffect(() => {
